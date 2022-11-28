@@ -8,7 +8,6 @@ export class UserDto {
 
   @ApiProperty()
   @IsEmail()
-  @IsNotEmpty()
   email: string;
 
   @ApiProperty()
