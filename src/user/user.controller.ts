@@ -12,7 +12,7 @@ import { PartialUserDto } from './services/dto/partialUserInput.dto';
 import { UserDto } from './services/dto/userInput.dto';
 import { UserService } from './services/user.service';
 
-@Controller('User')
+@Controller()
 export class UserController {
   constructor(private readonly service: UserService) {}
 
