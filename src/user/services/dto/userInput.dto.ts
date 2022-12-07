@@ -19,6 +19,5 @@ export class UserDto {
   cpf: string;
 
   @ApiProperty()
-  @IsString()
-  role: string;
+  isAdmin: boolean;
 }

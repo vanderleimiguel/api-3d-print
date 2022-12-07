@@ -11,23 +11,28 @@ datasource db {
 }
 
 model User {
-  id        String   @id @unique
-  name      String
-  email     String   @unique
-  password  String
-  cpf       String   @unique
-  role      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id       String    @id @default(uuid())
+  name     String
+  email    String    @unique
+  password String
+  cpf      String    @unique
+  isAdmin  Boolean   @default(false) @map("is_admin")
+  profiles Profile[]
 }
 
-model Product {
-  id          String   @id @unique
-  name        String
+model Profile {
+  id       String    @id @default(uuid())
+  title    String
+  imageUrl String    @map("image_url")
+  user     User      @relation(fields: [userId], references: [id])
+  userId   String
+  articles Article[]
+}
+
+model Article {
+  id          String    @id @default(uuid())
+  title       String    @unique
+  url         String    @map("cover_image")
   description String
-  scale       String
-  image       String
-  price       String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  profiles    Profile[]
 }

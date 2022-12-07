@@ -35,7 +35,7 @@ export class UserController {
 
   @Post()
   async createUser(
-    @Body() { cpf, email, password, name, role }: UserDto,
+    @Body() { cpf, email, password, name, isAdmin }: UserDto,
     @Res() response: Response,
   ) {
     try {
@@ -44,7 +44,7 @@ export class UserController {
         email,
         password,
         name,
-        role,
+        isAdmin,
       });
 
       response.status(201).send(result);
