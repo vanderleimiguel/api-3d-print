@@ -6,6 +6,7 @@ import { UserRepository } from '../user.repository';
 import { Injectable } from '@nestjs/common';
 import { Exception } from '../../../utils/exceptions/exception';
 import { Exceptions } from '../../../utils/exceptions/exceptionsHelper';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
@@ -19,12 +20,20 @@ export class UserService {
         'Password must be at least 7 characters',
       );
     }
+
+    //criar senha com hash
+    const hashedPassword = await bcrypt.hash(user.password, 10);
+    userEntity.password = hashedPassword;
     const createdUser = await this.userRepository.createUser(userEntity);
+
+    // deletar senha de usuario da visualização
+    delete createdUser.password;
     return createdUser;
   }
 
   async updateUser(userData: PartialUserDto): Promise<IUserEntity> {
     const updateUser = await this.userRepository.updateUser(userData);
+    delete updateUser.password;
     return updateUser;
   }
 
@@ -44,6 +53,7 @@ export class UserService {
 
   async getUserById(userId: string): Promise<IUserEntity> {
     const foundUser = await this.userRepository.findUserById(userId);
+    delete foundUser.password;
     return foundUser;
   }
 }
