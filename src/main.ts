@@ -14,6 +14,7 @@ async function bootstrap() {
     .setTitle('API 3D Print')
     .setDescription('The API for 3d print products')
     .setVersion('1.0')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

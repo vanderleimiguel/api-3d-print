@@ -16,7 +16,7 @@ export class UserRepository {
     } catch (err) {
       throw new Exception(
         Exceptions.DatabaseException,
-        'Erro ao criar usuario: cpf ou email ja cadastrados',
+        'Erro ao criar usuário cpf ou email ja cadastrados',
       );
     }
   }
@@ -42,7 +42,7 @@ export class UserRepository {
     } catch (err) {
       throw new Exception(
         Exceptions.DatabaseException,
-        'User not foud in database',
+        'User not found in database',
       );
     }
   }
@@ -65,6 +65,20 @@ export class UserRepository {
       return foundUser;
     } catch (err) {
       throw new Exception(Exceptions.DatabaseException);
+    }
+  }
+
+  async findUserByEmail(email: string): Promise<IUserEntity> {
+    try {
+      const foundUser = await this.prisma.user.findUniqueOrThrow({
+        where: { email: email },
+      });
+      return foundUser;
+    } catch (err) {
+      throw new Exception(
+        Exceptions.DatabaseException,
+        'user not found with this email',
+      );
     }
   }
 }
