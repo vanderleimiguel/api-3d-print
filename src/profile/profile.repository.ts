@@ -16,10 +16,7 @@ export class ProfileRepository {
       });
       return CreatedProfile;
     } catch (err) {
-      throw new Exception(
-        Exceptions.DatabaseException,
-        'Erro ao criar usuário cpf ou email ja cadastrados',
-      );
+      throw new Exception(Exceptions.DatabaseException, 'Erro ao criar perfil');
     }
   }
 
@@ -44,7 +41,7 @@ export class ProfileRepository {
     } catch (err) {
       throw new Exception(
         Exceptions.DatabaseException,
-        'User not found in database',
+        'profile not found in database',
       );
     }
   }
