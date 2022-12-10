@@ -17,8 +17,8 @@ import { UserService } from './services/user.service';
 import { Response } from 'express';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
-import { userLogged } from 'utils/auth/decorators/user-logged.decorator';
-import { adminAuthorization } from 'utils/auth/decorators/admin-decorator';
+import { userLogged } from 'src/auth/decorators/user-logged.decorator';
+import { adminAuthorization } from 'src/auth/decorators/admin-decorator';
 
 @Controller('user')
 @ApiTags('User')

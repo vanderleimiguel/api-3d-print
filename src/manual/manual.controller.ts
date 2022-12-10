@@ -10,12 +10,12 @@ import {
   Res,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { userLogged } from 'utils/auth/decorators/user-logged.decorator';
 import { IManualEntity } from './entities/manual.entity';
 import { ManualDto } from './services/dto/manualInput.dto';
 import { PartialManualDto } from './services/dto/partialManualInput.dto';
 import { ManualService } from './services/manual.service';
 import { Response } from 'express';
+import { userLogged } from 'src/auth/decorators/user-logged.decorator';
 
 @Controller('manual')
 @ApiTags('Manuals')

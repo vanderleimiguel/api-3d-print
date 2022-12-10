@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-
 import { DatabaseModule } from 'src/prisma/database.module';
 import { ProfileController } from './profile.controller';
 import { ProfileRepository } from './profile.repository';

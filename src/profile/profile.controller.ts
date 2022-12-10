@@ -10,7 +10,7 @@ import {
   Res,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { userLogged } from 'utils/auth/decorators/user-logged.decorator';
+import { userLogged } from 'src/auth/decorators/user-logged.decorator';
 import { IProfileEntity } from './entities/profile.entity';
 import { PartialProfileDto } from './services/dto/partialProfileInput.dto';
 import { ProfileDto } from './services/dto/profileInput.dto';
