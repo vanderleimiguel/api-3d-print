@@ -6,19 +6,24 @@ import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  app.enableCors();
+
   // statuscode
   app.useGlobalPipes(new ValidationPipe());
 
   // swagger
   const config = new DocumentBuilder()
-    .setTitle('API 3D Print')
-    .setDescription('The API for 3d print products')
+    .setTitle('Technical Manuals')
+    .setDescription('The API for Technical Manuals')
     .setVersion('1.0')
+    .addTag('Authorization')
+    .addTag('User')
+    .addTag('Profile')
+    .addTag('Manuals')
     .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
-
   SwaggerModule.setup('api/docs', app, document);
 
   await app.listen(3000);

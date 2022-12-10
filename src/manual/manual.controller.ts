@@ -1,9 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { ManualService } from './manual.service';
 import { CreateManualDto } from './dto/create-manual.dto';
 import { UpdateManualDto } from './dto/update-manual.dto';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('manual')
+@ApiTags('Manuals')
 export class ManualController {
   constructor(private readonly manualService: ManualService) {}
 

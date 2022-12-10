@@ -8,22 +8,32 @@ import {
   Patch,
   Post,
   Res,
+  UseGuards,
 } from '@nestjs/common';
 import { IUserEntity } from './entities/user.entity';
 import { PartialUserDto } from './services/dto/partialUserInput.dto';
 import { UserDto } from './services/dto/userInput.dto';
 import { UserService } from './services/user.service';
 import { Response } from 'express';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
+import { userLogged } from 'utils/auth/decorators/user-logged.decorator';
+import { adminAuthorization } from 'utils/auth/decorators/admin-decorator';
 
 @Controller('user')
+@ApiTags('User')
 export class UserController {
   constructor(private readonly service: UserService) {}
 
+  @UseGuards(AuthGuard(), adminAuthorization)
+  @ApiBearerAuth()
   @Get()
   async getAllUsers(): Promise<IUserEntity[]> {
     return await this.service.getAllUsers();
   }
 
+  @UseGuards(AuthGuard(), adminAuthorization)
+  @ApiBearerAuth()
   @Get(':id')
   async getUserById(@Param('id') userId: string): Promise<IUserEntity> {
     try {
@@ -54,8 +64,13 @@ export class UserController {
     }
   }
 
+  @UseGuards(AuthGuard())
+  @ApiBearerAuth()
   @Patch(':id')
-  async updateUser(@Body() userData: PartialUserDto): Promise<IUserEntity> {
+  async updateUser(
+    @Body() userData: PartialUserDto,
+    @userLogged() user: IUserEntity,
+  ): Promise<IUserEntity> {
     try {
       return await this.service.updateUser(userData);
     } catch (err) {
@@ -63,17 +78,15 @@ export class UserController {
     }
   }
 
+  @UseGuards(AuthGuard())
+  @ApiBearerAuth()
   @Delete(':id')
   async deleteUserById(@Param('id') userId: string): Promise<string> {
-    try {
-      const userIsDeleted = await this.service.deleteUserById(userId);
-      if (userIsDeleted) {
-        return 'User deleted successfully';
-      } else {
-        return 'User not found';
-      }
-    } catch (err) {
-      console.log(err);
+    const userIsDeleted = await this.service.deleteUserById(userId);
+    if (userIsDeleted) {
+      return 'User deleted successfully';
+    } else {
+      return 'User not found';
     }
   }
 }

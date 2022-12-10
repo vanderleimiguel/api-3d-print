@@ -9,9 +9,9 @@ import { UserModule } from './user/user.module';
   imports: [
     DatabaseModule,
     AuthModule,
+    UserModule,
     ProfileModule,
     ManualModule,
-    UserModule,
   ],
 })
 export class AppModule {}

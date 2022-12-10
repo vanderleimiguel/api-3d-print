@@ -7,7 +7,7 @@ import { UserDto } from '../services/dto/userInput.dto';
 //   email: string;
 //   password: string;
 //   cpf: string;
-//   role: string;
+//   isAdmin: string;
 // }
 
 export interface IUserEntity extends UserDto {
