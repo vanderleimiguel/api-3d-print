@@ -47,6 +47,7 @@ export class ManualController {
         url,
         description,
       });
+      response.status(201).send(result);
     } catch (err) {
       console.log(err);
       throw new BadRequestException(err.message);
