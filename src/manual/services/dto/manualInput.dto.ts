@@ -20,4 +20,10 @@ export class ManualDto {
     example: 'manual da maquina x',
   })
   description: string;
+
+  @ApiProperty({
+    description: 'id do perfil',
+    example: '',
+  })
+  profileId?: string;
 }

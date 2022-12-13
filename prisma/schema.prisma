@@ -30,9 +30,10 @@ model Profile {
 }
 
 model Manual {
-  id          String    @id @default(uuid())
-  title       String    @unique
-  url         String    @map("cover_image")
+  id          String   @id @default(uuid())
+  title       String   @unique
+  url         String   @map("cover_image")
   description String
-  profiles    Profile[]
+  profileId   String?
+  Profile     Profile? @relation(fields: [profileId], references: [id])
 }
