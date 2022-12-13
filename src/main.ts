@@ -17,6 +17,7 @@ async function bootstrap() {
     .setDescription('The API for Technical Manuals')
     .setVersion('1.0')
     .addTag('Authorization')
+    .addTag('HomePage')
     .addTag('User')
     .addTag('Profile')
     .addTag('Manuals')
